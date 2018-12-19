@@ -1,0 +1,11 @@
+<div *ngIf="patientQuery | async as pq">
+  Patient:
+  <div *ngIf="!pq.loading; else loading">
+    <p>ID: {{pq.data.patient.id}}</p>
+    <p>Name: {{pq.data.patient.name}}</p>
+  </div>
+</div>
+
+<ng-template #loading>
+  Loading stuff...
+</ng-template>
