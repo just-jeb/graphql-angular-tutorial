@@ -30,6 +30,12 @@ const mockSchema = gql`
   }
 `;
 
+let counter = 0;
+
+const mocks = {
+  LabTestResult: () => ({type: 'LabTestType' + counter, value: 'LabTestValue' + counter++})
+};
+
 const patients = {'1': {name: 'Donald Trump', id: '1'}};
 
 const resolvers = {
@@ -45,12 +51,6 @@ const resolvers = {
       return patients[id];
     }
   }
-};
-
-let counter = 0;
-
-const mocks = {
-  LabTestResult: () => ({type: 'LabTestType' + counter, value: 'LabTestValue' + counter++})
 };
 
 const uri = ''; // <-- add the URL of the GraphQL server here
