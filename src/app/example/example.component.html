@@ -1,9 +1,15 @@
 <div *ngIf="patientQuery | async as pq">
   Patient:
-  <div *ngIf="!pq.loading; else loading">
+  <form *ngIf="!pq.loading; else loading" [formGroup]="formGroup">
     <p>ID: {{pq.data.patient.id}}</p>
-    <p>Name: {{pq.data.patient.name}}</p>
-  </div>
+    <p>Name: <input type="text" [value]="pq.data.patient.name" [formControlName]="'name'"></p>
+    <div>
+      Lab test results:
+      <p *ngFor="let lt of pq.data.patient.labTestResults">
+        Type: {{lt.type}}, result: {{lt.value}}
+      </p>
+    </div>
+  </form>
 </div>
 
 <ng-template #loading>
