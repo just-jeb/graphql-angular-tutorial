@@ -1,16 +1,17 @@
-<div *ngIf="patientQuery | async as pq">
-  Patient:
+<div id="container" *ngIf="patientQuery | async as pq">
+
   <form *ngIf="!pq.loading; else loading" [formGroup]="formGroup">
-    <p>ID: {{pq.data.patient.id}}</p>
-    <p>Name: <input type="text" [value]="pq.data.patient.name" [formControlName]="'name'"></p>
+    <span>Patient ID: {{pq.data.patient.id}}</span>,
+    <span>Name: <input type="text" [value]="pq.data.patient.name" [formControlName]="'name'"></span>
     <div>
-      Lab test results:
-      <p *ngFor="let lt of pq.data.patient.labTestResults">
-        Type: {{lt.type}}, result: {{lt.value}}
-      </p>
+      <h5>Lab test results:</h5>
+      <ul class="list-group">
+        <li *ngFor="let lt of pq.data.patient.labTestResults" class="list-group-item d-flex justify-content-between align-items-center">
+          {{lt.type}}<span class="badge badge-primary badge-pill">{{lt.value}}</span>
+        </li>
+      </ul>
     </div>
   </form>
-</div>
 
 <ng-template #loading>
   Loading stuff...
